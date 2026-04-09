@@ -72,4 +72,18 @@ if ! grep -qF "$SOURCE_LINE" "$BASHRC" 2>/dev/null; then
   echo "  updated: ~/.bashrc"
 fi
 
+# プラグイン自動インストール
+PLUGINS_FILE="$DOTFILES/claude/plugins.txt"
+if [ -f "$PLUGINS_FILE" ] && command -v claude &>/dev/null; then
+  echo "==> Installing Claude Code plugins..."
+  grep -v '^\s*#' "$PLUGINS_FILE" | grep -v '^\s*$' | while read -r plugin; do
+    if claude plugin list 2>/dev/null | grep -q "$plugin@"; then
+      echo "  skip (already installed): $plugin"
+    else
+      echo "  installing: $plugin"
+      claude plugin install "$plugin@claude-plugins-official" 2>&1 | sed 's/^/    /'
+    fi
+  done
+fi
+
 echo "==> Done!"
