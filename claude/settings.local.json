@@ -1,8 +1,4 @@
 {
-  "statusLine": {
-    "type": "command",
-    "command": "~/.dotfiles/claude/statusline.sh"
-  },
   "permissions": {
     "allow": [
       "Bash(npm --version)",
@@ -38,7 +34,15 @@
       "WebFetch(domain:deepwiki.com)",
       "WebFetch(domain:www.aimadetools.com)",
       "WebFetch(domain:docs.continue.dev)",
-      "Bash(chmod +x:*)"
+      "Bash(chmod +x:*)",
+      "Bash(xargs cat:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(gh auth:*)"
     ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.dotfiles/claude/statusline.sh"
   }
 }
