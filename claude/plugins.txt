@@ -1,0 +1,11 @@
+# インストール済みプラグイン一覧
+# 新環境では claude を起動後 /plugin install <name> で再インストール
+
+superpowers
+github
+frontend-design
+code-review
+code-simplifier
+playwright
+skill-creator
+claude-md-management

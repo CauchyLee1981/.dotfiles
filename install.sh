@@ -52,6 +52,16 @@ backup_and_link \
   "$HOME/.claude/settings.local.json" \
   "../.dotfiles/claude/settings.local.json"
 
+backup_and_link \
+  "$DOTFILES/claude/CLAUDE.md" \
+  "$HOME/.claude/CLAUDE.md" \
+  "../.dotfiles/claude/CLAUDE.md"
+
+backup_and_link \
+  "$DOTFILES/claude/agents" \
+  "$HOME/.claude/agents" \
+  "../.dotfiles/claude/agents"
+
 # .bashrc に source 行を追記（重複しない）
 BASHRC="$HOME/.bashrc"
 SOURCE_LINE='[ -f ~/.dotfiles/bash/aliases.sh ] && source ~/.dotfiles/bash/aliases.sh'
