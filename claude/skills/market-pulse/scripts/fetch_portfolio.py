@@ -493,7 +493,25 @@ def main():
     parser = argparse.ArgumentParser(description="モーニングチェック データ取得")
     parser.add_argument("--all", action="store_true",
                         help="全銘柄を詳細表示（デフォルトは要アクション銘柄のみ）")
+    parser.add_argument("--skip-sync", action="store_true",
+                        help="SBI証券からの自動同期をスキップ")
     args = parser.parse_args()
+
+    # ── SBI証券自動同期 ──────────────────────────────────────────
+    if not args.skip_sync:
+        sbi_sync_path = os.path.join(os.path.dirname(__file__), "sbi_sync.py")
+        if os.path.isfile(sbi_sync_path) and os.environ.get("SBI_COOKIE"):
+            try:
+                result = subprocess.run(
+                    [sys.executable, sbi_sync_path],
+                    capture_output=True, text=True, timeout=120
+                )
+                if result.returncode == 0:
+                    print(result.stdout)
+                else:
+                    print(f"[警告] SBI同期に失敗: {result.stderr}", file=sys.stderr)
+            except subprocess.TimeoutExpired:
+                print("[警告] SBI同期がタイムアウトしました", file=sys.stderr)
 
     portfolio = load_portfolio()
     account   = portfolio.get("account", {})
