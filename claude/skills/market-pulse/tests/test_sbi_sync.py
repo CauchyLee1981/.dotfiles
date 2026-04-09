@@ -16,13 +16,14 @@ def test_parse_holdings_html_extracts_tickers():
     assert "285A" in tickers
 
 
-def test_parse_holdings_html_extracts_quantity():
+def test_parse_holdings_html_extracts_quantity_and_name():
     with open(os.path.join(FIXTURES, "sbi_holdings.html"), encoding="utf-8") as f:
         html = f.read()
     result = parse_holdings_html(html)
     nintendo = next(h for h in result if h["ticker"] == "7974")
     assert nintendo["quantity"] == 100
     assert nintendo["name"] == "任天堂"
+    assert nintendo["cost_price"] == 10673
 
 
 def test_parse_holdings_html_extracts_cost_price():
@@ -30,7 +31,8 @@ def test_parse_holdings_html_extracts_cost_price():
         html = f.read()
     result = parse_holdings_html(html)
     softbank = next(h for h in result if h["ticker"] == "9984")
-    assert softbank["cost_price"] == 4200
+    assert softbank["cost_price"] == 4775
+    assert softbank["quantity"] == 400
 
 
 def test_parse_holdings_html_empty_table_returns_empty():
@@ -38,15 +40,26 @@ def test_parse_holdings_html_empty_table_returns_empty():
     assert result == []
 
 
-def test_parse_account_html_extracts_totals():
+def test_parse_account_html_extracts_buying_power():
     with open(os.path.join(FIXTURES, "sbi_account.html"), encoding="utf-8") as f:
         html = f.read()
     result = parse_account_html(html)
-    assert result["total_assets"] == 9466965
-    assert result["available_cash"] == 974965
+    assert result["available_cash"] == 1176432
+
+
+def test_parse_account_html_extracts_total_assets():
+    with open(os.path.join(FIXTURES, "sbi_account.html"), encoding="utf-8") as f:
+        html = f.read()
+    result = parse_account_html(html)
+    assert result["total_assets"] == 13978184
 
 
 def test_parse_account_html_empty_returns_none():
     result = parse_account_html("<html><body></body></html>")
     assert result["total_assets"] is None
     assert result["available_cash"] is None
+
+
+def test_parse_holdings_login_error():
+    with pytest.raises(ValueError, match="Cookieが無効"):
+        parse_holdings_html("<html><body>ログインしてください</body></html>")
