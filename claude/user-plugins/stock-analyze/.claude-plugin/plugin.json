@@ -1,0 +1,5 @@
+{
+  "name": "stock-analyze",
+  "description": "日本株のテクニカル分析・バックテスト・スキャンを実行するスキル",
+  "author": {"name": "fujie"}
+}
