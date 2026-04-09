@@ -83,7 +83,7 @@ PLUGINS_FILE="$DOTFILES/claude/plugins.txt"
 if [ -f "$PLUGINS_FILE" ] && command -v claude &>/dev/null; then
   echo "==> Installing Claude Code plugins..."
   grep -v '^\s*#' "$PLUGINS_FILE" | grep -v '^\s*$' | while read -r plugin; do
-    if claude plugin list 2>/dev/null | grep -q "$plugin@"; then
+    if claude plugin list 2>/dev/null | grep -A4 "$plugin@" | grep -q "enabled"; then
       echo "  skip (already installed): $plugin"
     else
       echo "  installing: $plugin"
