@@ -2,3 +2,6 @@
 # format: github_repo   marketplace_id
 anthropics/claude-plugins-official   claude-plugins-official
 revfactory/harness                   harness-marketplace
+
+# 社内マーケットプレイス（YOUR_ORG を実際の GitHub org 名に変更してアンコメント）
+# YOUR_ORG/claude-plugins   org-marketplace

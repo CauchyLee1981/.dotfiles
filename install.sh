@@ -110,4 +110,20 @@ if command -v claude &>/dev/null; then
   fi
 fi
 
+# ローカルプラグインのインストール
+LOCAL_PLUGINS_DIR="$DOTFILES/claude/local-plugins"
+if command -v claude &>/dev/null && [ -d "$LOCAL_PLUGINS_DIR" ]; then
+  echo "==> Installing local plugins..."
+  for plugin_dir in "$LOCAL_PLUGINS_DIR"/*/; do
+    [ -d "$plugin_dir" ] || continue
+    plugin_name=$(basename "$plugin_dir")
+    if claude plugin list 2>/dev/null | grep -q "^$plugin_name "; then
+      echo "  skip (already installed): $plugin_name"
+    else
+      echo "  installing local plugin: $plugin_name"
+      claude plugin install "$plugin_dir" 2>&1 | sed 's/^/    /'
+    fi
+  done
+fi
+
 echo "==> Done!"
