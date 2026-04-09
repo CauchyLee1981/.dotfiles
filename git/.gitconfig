@@ -1,0 +1,9 @@
+[user]
+	name = 付傑
+	email = ultraj0510@gmail.com
+
+[core]
+	autocrlf = input
+
+[init]
+	defaultBranch = main
