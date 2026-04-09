@@ -1,7 +1,7 @@
 # インストール済みプラグイン一覧（name@marketplace 形式）
 
-# チーム共通プラグイン（org-marketplace 登録後にアンコメント）
-# team-standards@org-marketplace
+# チーム共通プラグイン
+team-standards@org-marketplace
 
 superpowers@claude-plugins-official
 github@claude-plugins-official
