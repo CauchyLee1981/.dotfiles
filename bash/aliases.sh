@@ -1,7 +1,10 @@
 # Claude Code API switching aliases
 
 # MiMo API で claude を起動
-alias claude-mimo='source ~/.claude/mimo.env && claude'
+# コンテナ内: /run/secrets/mimo.env (bind mount)
+# WSLホスト: ~/.claude/mimo.env
+_mimo_env() { [ -f /run/secrets/mimo.env ] && echo /run/secrets/mimo.env || echo ~/.claude/mimo.env; }
+alias claude-mimo='source "$(_mimo_env)" && claude'
 
 # Anthropic 公式 OAuth で claude を起動（MiMo env vars を明示的にクリア）
 alias claude-official='env -u ANTHROPIC_BASE_URL -u ANTHROPIC_AUTH_TOKEN \
