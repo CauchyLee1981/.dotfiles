@@ -1,4 +1,8 @@
 {
+  "statusLine": {
+    "type": "command",
+    "command": "~/.dotfiles/claude/statusline.sh"
+  },
   "permissions": {
     "allow": [
       "Bash(npm --version)",
@@ -17,7 +21,24 @@
       "Bash(ssh-keyscan github.com)",
       "Bash(curl:*)",
       "Bash(bash:*)",
-      "Bash(claude plugin:*)"
+      "Bash(claude plugin:*)",
+      "Bash(python3 -m json.tool)",
+      "Bash(gh api:*)",
+      "Bash(python3 -c \"import json,sys; [print\\(f['name']\\) for f in json.load\\(sys.stdin\\)]\")",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(sudo rm:*)",
+      "WebFetch(domain:platform.xiaomimimo.com)",
+      "Bash(find /home/ultraj/.vscode-server/extensions/anthropic.claude-code* -type f -name \"*.md\" -o -name \"README*\")",
+      "WebSearch",
+      "WebFetch(domain:docs.openclaw.ai)",
+      "WebFetch(domain:docs.litellm.ai)",
+      "Bash(ls -la /home/ultraj/.claude/statusline*)",
+      "WebFetch(domain:apidog.com)",
+      "WebFetch(domain:deepwiki.com)",
+      "WebFetch(domain:www.aimadetools.com)",
+      "WebFetch(domain:docs.continue.dev)",
+      "Bash(chmod +x:*)"
     ]
   }
 }
