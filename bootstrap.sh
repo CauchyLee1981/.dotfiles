@@ -14,4 +14,4 @@ else
   git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
 fi
 
-bash "$DOTFILES_DIR/install.sh"
+bash -v "$DOTFILES_DIR/install.sh"
